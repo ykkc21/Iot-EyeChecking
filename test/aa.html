@@ -1,0 +1,96 @@
+<style>
+  #img {
+    border: 1px solid #000;
+    width: 400px;
+    height: 300px;
+    display: block;
+  }
+</style>
+<div>Teachable Machine Image Model</div>
+<!-- <div id="webcam-container"></div> -->
+<img src="" alt="img" id="img" crossorigin="anonymous" />
+<div id="label-container"></div>
+<script src="./jquery-3.6.0.js"></script>
+<script
+  src="https://example.com/example-framework.js"
+  crossorigin="anonymous"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+<script type="text/javascript">
+  // More API functions here:
+  // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+  // the link to your model provided by Teachable Machine export panel
+  const URL = "./my_model/";
+
+  let model, webcam, labelContainer, maxPredictions;
+  let count = 0;
+  let count2 = 0;
+  let img = document.getElementById("img");
+  const r = document.getElementById("label-container");
+  // Load the image model and setup the webcam, 이미지 모델 로드 및 웹캠 설정
+
+  const modelURL = URL + "model.json";
+  const metadataURL = URL + "metadata.json";
+
+  setInterval(() => {
+    img.src = "http://172.20.10.13/capture?t=" + Math.random();
+    img.crossOrigin = "Anonymous";
+    $(img).attr("src", img.src);
+  }, 500);
+
+  img.onload = async () => {
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
+    labelContainer = document.getElementById("label-container");
+    for (let i = 0; i < maxPredictions; i++) {
+      // and class labels, 및 클래스 레이블
+      labelContainer.appendChild(document.createElement("div"));
+    }
+
+    const prediction = await model.predict(img);
+    console.log(prediction);
+    for (let i = 0; i < maxPredictions; i++) {
+      if (prediction[0].probability > 0.65) {
+        count++;
+        // console.log("Yes: " + count);
+        if (count == 5) {
+          setTimeout(() => {
+            $.ajax({
+              type: "POST",
+              url: "http://13.124.110.80:3000/cam",
+              data: { text: "Show" },
+              dataType: "text",
+              success: function (res) {
+                console.log("OKOK!!!");
+              },
+            });
+          }, 1000);
+          count = 0;
+        }
+      } else {
+        count2++;
+        // console.log("No: " + count2);
+        if (count2 == 2) {
+          setTimeout(() => {
+            $.ajax({
+              type: "POST",
+              url: "http://13.124.110.80:3000/cam",
+              data: { text: "No" },
+              dataType: "text",
+              success: function (res) {
+                // console.log("NONO!!!");
+              },
+            });
+          }, 1000);
+          count2 = 0;
+        }
+      }
+      const classPrediction =
+        prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+      labelContainer.childNodes[i].innerHTML = classPrediction;
+      // console.log(classPrediction);
+    }
+  };
+</script>
