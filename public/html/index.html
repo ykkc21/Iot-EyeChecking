@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eyes Checking</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+        box-sizing: border-box;
+      }
+
+      .MainBox {
+        width: 100%;
+        height: 350px;
+        background-color: brown;
+        position: relative;
+      }
+      .icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 110px;
+        height: 110px;
+        opacity: 0;
+      }
+
+      .icon_box1 {
+        background-image: url("/image/witness.png");
+        background-size: 100% 100%;
+        opacity: 1;
+      }
+
+      .icon_box2 {
+        background-image: url("/image/hidden.png");
+        background-size: 100% 100%;
+      }
+
+      .MainBox:hover .icon_box2 {
+        opacity: 1;
+      }
+      .MainBox:hover .icon_box1 {
+        opacity: 0;
+      }
+
+      .container {
+        width: 100%;
+      }
+
+      .editBtn {
+        display: block;
+        width: 300px;
+        height: 80px;
+        background-color: aqua;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 80px;
+        font-size: 20px;
+        margin-top: 80px;
+        color: #fff;
+      }
+
+      .report {
+        display: block;
+        width: 300px;
+        height: 80px;
+        background-color: red;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 80px;
+        font-size: 20px;
+        margin-top: 30px;
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="MainBox">
+      <div class="icon_box1 icon"></div>
+      <div class="icon_box2 icon"></div>
+    </div>
+
+    <div class="container">
+      <a class="editBtn" href="/html/edit.html">사용자 등록</a>
+    </div>
+
+    <div class="container">
+      <form action="/report" method="get">
+        <input type="submit" class="report" value="긴급신고" />
+      </form>
+    </div>
+  </body>
+</html>
