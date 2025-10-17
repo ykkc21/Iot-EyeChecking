@@ -2,7 +2,7 @@
 
 압력센서와 AI 카메라를 활용한 졸음 운전 방지 시스템
 
-📄 [전체 보고서 (.docx) 다운로드](https://github.com/ykkc21/Iot-EyeChecking/raw/main/IoT_Eyes%20Checking.docx)
+📄 [전체 보고서 (.docx) 다운로드](https://github.com/ykkc21/Iot-EyeChecking/raw/main/IoT_Eyes_Checking.docx)
 
 - 개발배경
   화물차, 장거리 운전자 등에게 졸음운전은 큰 사고 위험 요인이다.
