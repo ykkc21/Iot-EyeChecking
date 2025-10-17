@@ -19,5 +19,9 @@ IoT Eyes Checking 프로젝트
   졸음운전 사고 예방 → 사회적 비용 절감.
   사망사고 감소 및 교통안전 향상.
 
+- 보완점
+  Teachable Machine → OpenCV로 교체 예정  
+  데이터베이스(MySQL 등)에 감지 이력 저장 기능 추가
+
 - 포스터 이미지</br>
   <img width="301" height="421" alt="Image" src="https://github.com/user-attachments/assets/a7445f47-ef65-4c9c-9990-8cac0362fe22" />
